@@ -1,0 +1,49 @@
+---
+- name: create yace_exporter_exporter system group
+  group:
+    name: "{{ yace_exporter_system_group }}"
+    system: true
+    state: present
+
+- name: create yace_exporter_exporter system user
+  user:
+    name: "{{ yace_exporter_system_user }}"
+    system: true
+    shell: "/sbin/nologin"
+    group: "{{ yace_exporter_system_group }}"
+    createhome: false
+    comment: "Yet-another-cloudwatch-exporter"
+
+- name: Check is binary is installed
+  stat:
+    path: /usr/local/bin/yace
+  register: yace_installed
+
+- name: Check version is already installed
+  shell: "/usr/local/bin/yace -v | grep -q {{ yace_exporter_version }}"
+  ignore_errors: true
+  register: version_installed
+  when: yace_installed.stat.exists
+  failed_when: false
+  changed_when: false
+
+- name: download yace exporter binary
+  become: false
+  unarchive:
+    src: "{{ yace_exporter_tarball_url }}"
+    dest: "/tmp"
+    remote_src: true
+    validate_certs: false # for some reason download complains about the SSL cert when running on the test containers
+  when: (not yace_installed.stat.exists) or (version_installed.rc != 0)
+
+- name: propagate yace exporter binary
+  copy:
+    src: "/tmp/yace"
+    dest: "/usr/local/bin/yace"
+    remote_src: true
+    mode: 0755
+    owner: "{{ yace_exporter_system_user }}"
+    group: "{{ yace_exporter_system_group }}"
+  when: (not yace_installed.stat.exists) or (version_installed.rc != 0)
+  notify:
+    - restart yace exporter

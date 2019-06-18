@@ -1,0 +1,3 @@
+---
+yace_exporter_tarball_filename: "yet-another-cloudwatch-exporter_{{ yace_exporter_version }}_Linux_{{ansible_architecture}}.tar.gz"
+yace_exporter_tarball_url: "https://github.com/ivx/yet-another-cloudwatch-exporter/releases/download/v{{ yace_exporter_version }}/{{yace_exporter_tarball_filename}}"

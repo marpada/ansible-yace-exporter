@@ -1,0 +1,23 @@
+{{ ansible_managed | comment }}
+[Unit]
+Description=YACE Exporter
+After=network-online.target
+
+[Service]
+Type=simple
+PIDFile=/var/run/yace_exporter.pid
+User={{yace_exporter_system_user}}
+Group={{yace_exporter_system_group}}
+PermissionsStartOnly=true
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStart=/usr/local/bin/yace          \
+  -config.file=/etc/yace_exporter.yml \
+  -listen-address={{ yace_exporter_web_listen_address }} {% if yace_exporter_debug | default(false) %} \
+  -debug {% endif %}
+
+SyslogIdentifier=yace_exporter
+KillMode=process
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

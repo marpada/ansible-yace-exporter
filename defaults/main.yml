@@ -1,0 +1,7 @@
+---
+yace_exporter_version: 0.13.4
+yace_exporter_web_listen_address: "127.0.0.1:5000"
+yace_exporter_system_group: "yace-exp"
+yace_exporter_system_user: "yace-exp"
+yace_exporter_configuration: {}
+yace_exporter_debug: false

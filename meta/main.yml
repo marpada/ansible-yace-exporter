@@ -1,0 +1,30 @@
+---
+galaxy_info:
+  author: David Pando
+  description: Prometheus YACE Exporter
+  license: MIT
+  company: none
+  min_ansible_version: 2.5
+  platforms:
+  - name: Ubuntu
+    versions:
+    - bionic
+    - xenial
+  - name: Debian
+    versions:
+    - jessie
+    - stretch
+  - name: EL
+    versions:
+    - 7
+  - name: Fedora
+    versions:
+    - 27
+  galaxy_tags:
+  - exporter
+  - monitoring
+  - prometheus
+  - metrics
+  - cloudwatch
+
+dependencies: []
