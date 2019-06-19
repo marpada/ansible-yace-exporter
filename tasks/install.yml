@@ -26,6 +26,7 @@
   when: yace_installed.stat.exists
   failed_when: false
   changed_when: false
+  check_mode: no
 
 - name: download yace exporter binary
   become: false
