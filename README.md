@@ -16,7 +16,7 @@ All variables which can be overridden are stored in [defaults/main.yml](defaults
 
 | Name           | Default Value | Description                        |
 | -------------- | ------------- | -----------------------------------|
-| `yace_exporter_version` | 0.13.6 | yace exporter package version |
+| `yace_exporter_version` | 0.13.7 | yace exporter package version |
 | `yace_exporter_web_listen_address` | 127.0.0.1:5000 | Address on which yace exporter will be listening |
 | `yace_exporter_configuration` | {} | [yace exporter configuration](https://github.com/ivx/yet-another-cloudwatch-exporter#configuration) |
 | `yace_exporter_debug` | false | Enable debug mode |
