@@ -10,6 +10,10 @@ User={{yace_exporter_system_user}}
 Group={{yace_exporter_system_group}}
 PermissionsStartOnly=true
 ExecReload=/bin/kill -HUP $MAINPID
+{% if yace_exporter_aws_credentials is defined %}
+Environment="AWS_ACCESS_KEY_ID={{ yace_exporter_aws_credentials.aws_access_key_id }}"
+Environment="AWS_SECRET_ACCESS_KEY={{ yace_exporter_aws_credentials.aws_secret_access_key }}"
+{% endif %}
 ExecStart=/usr/local/bin/yace          \
   -config.file=/etc/yace_exporter.yml \
   -listen-address={{ yace_exporter_web_listen_address }} {% if yace_exporter_debug | default(false) %} \

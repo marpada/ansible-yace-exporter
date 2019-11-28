@@ -5,3 +5,8 @@ yace_exporter_system_group: "yace-exp"
 yace_exporter_system_user: "yace-exp"
 yace_exporter_configuration: {}
 yace_exporter_debug: false
+
+# If defined add environnement variables for AWS credential in service definition
+#yace_exporter_aws_credentials:
+#  aws_access_key_id: xxxx
+#  aws_secret_access_key: xxxx
